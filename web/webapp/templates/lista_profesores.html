@@ -3,9 +3,9 @@
 {% block contenidoQueCambia %}
 
    <ul>
-    {% for curso in lista_cursos %}
+    {% for profesor in lista_profesores %}
 
-    <li>{{curso}}</li>
+    <li>Nombre:{{profesor.nombre}} <br> Materia:{{profesor.materia}} </li>
     
     {% endfor %}
    </ul> 

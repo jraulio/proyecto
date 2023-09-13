@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Curso, Estudiante, Profesor
 from .forms import CursoFormulario, CrearEstudiante, CrearProfesor
 
@@ -15,6 +15,18 @@ def listar_cursos(req):
     lista = Curso.objects.all()
 
     return render(req, "lista_cursos.html", {"lista_cursos": lista})
+
+def listar_estudiantes(req):
+
+    lista = Estudiante.objects.all()
+
+    return render(req, "lista_estudiantes.html", {"lista_estudiantes": lista})
+
+def listar_profesores(req):
+
+    lista = Profesor.objects.all()
+
+    return render(req, "lista_profesores.html", {"lista_profesores": lista})
 
 def inicio(req):
 
@@ -105,18 +117,16 @@ def busqueda(req):
     return render(req, "inicio.html")
 
 
+def formulario(request):
+    if request.method == 'POST':
+        seleccion = request.POST.get('opcion_seleccionada')
+        if seleccion == 'opcion1':
+            return redirect('lista-cursos/')  
+        elif seleccion == 'opcion2':
+            return redirect('lista-estudiantes/') 
+        elif seleccion == 'opcion3':
+            return redirect('lista-profesores/')  
+
+    return render(request, 'inicio.html')
+
     
-def buscar(req):
-    busqueda = req.GET('busqueda', '')
-    tipo_busqueda = req.GET('tipo_busqueda', '')
-
-    resultados = []
-
-    if tipo_busqueda == 'usuario':
-        resultados = Estudiante.objects.filter(nombre__icontains=busqueda)
-    elif tipo_busqueda == 'curso':
-        resultados = Curso.objects.filter(nombre__icontains=busqueda)
-    elif tipo_busqueda == 'profesor':
-        resultados = Profesor.objects.filter(nombre__icontains=busqueda)
-
-    return render(req, 'resultados_busquedas.html', {'resultados': resultados, 'busqueda': busqueda, 'tipo_busqueda': tipo_busqueda})

@@ -3,22 +3,16 @@
 {% block contenidoQueCambia %}
 
 
+<form method="post" action="{% url 'inicio' %}"> {% csrf_token %}
 
-    <h1>Buscar en la Base de Datos</h1>
-    <form method="GET" action="{% url 'inicio' %}">
-
-        <label for="busqueda">Búsqueda:</label>
-        <input type="text" id="busqueda" name="busqueda" required>
-        
-        <label for="tipo_busqueda">Tipo de Búsqueda:</label>
-        <select id="tipo_busqueda" name="tipo_busqueda" required>
-            <option value="curso">Curso</option>
-            <option value="usuario">Usuario</option>
-            <option value="profesor">Profesor</option>
-        </select>
-        
-        <button type="submit">Buscar</button>
-    </form>
+    <label for="opcion_seleccionada">Selecciona una opción:</label>
+    <select id="opcion_seleccionada" name="opcion_seleccionada">
+      <option value="opcion1">Cursos</option>
+      <option value="opcion2">Estudiantes</option>
+      <option value="opcion3">Profesores</option>
+    </select>
+    <button type="submit">Enviar</button>
+  </form>
 
 
 {% endblock contenidoQueCambia %}
