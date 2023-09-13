@@ -1,0 +1,20 @@
+{% extends "padre.html" %}
+
+{% block contenidoQueCambia %}
+
+<h1>Resultados de la Búsqueda</h1>
+<p>Has buscado: {{ busqueda }}</p>
+<p>Tipo de Búsqueda: {{ tipo_busqueda }}</p>
+
+<ul>
+    {% if resultados %}
+        {% for resultado in resultados %}
+            <li>{{ resultado.nombre }}</li>
+        {% endfor %}
+    {% else %}
+        <li>No se encontraron resultados.</li>
+    {% endif %}
+</ul>
+
+<a href="{% url 'formulario_busquedas' %}">Realizar otra búsqueda</a>
+{% endblock contenidoQueCambia %}
